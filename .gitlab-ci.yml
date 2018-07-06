@@ -1,0 +1,9 @@
+pages:
+	stage: deploy
+	script:
+	- echo 'Hello, world!'
+	artifacts:
+		paths:
+		- public
+	only:
+	- master
