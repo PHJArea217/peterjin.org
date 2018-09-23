@@ -3,6 +3,7 @@ image: ubuntu:16.04
 pages:
   stage: deploy
   script:
+  - apt-get update
   - apt-get install libtext-markdown-perl
   - sh run.sh
   artifacts:
