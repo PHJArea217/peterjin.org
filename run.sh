@@ -2,11 +2,23 @@
 
 OUTPUT_DIR="public/blog/"
 BLOG_POSTS_DIR="blog-posts/"
+DISQUS_BASE_URL="https://www.peterjin.org/"
 
 mkdir -p "$OUTPUT_DIR"
 
 sed_text() {
 	sed -n '/^<!-- BEGIN '"$1"' -->$/,/^<!-- END '"$1"' -->$/p' "$2"
+}
+
+insert_disqus_comments() {
+	cat <<EOF
+<script>
+var disqus_config = function () {
+	this.page.url = "$DISQUS_BASE_URL${OUTPUT_DIR##public/}/$1.html"
+	this.page.identifier = "$1"
+}
+</script>
+EOF
 }
 
 sed_text HEADER blog-template.html > "$OUTPUT_DIR/index.html"
@@ -29,6 +41,7 @@ for x in "$BLOG_POSTS_DIR"/*.md; do
 		sed_text HEADER blogpost-template.html
 		printf '<title>%s - www.peterjin.org</title>\n' "$BP_SUBJECT"
 		sed_text POSTHEADER blogpost-template.html
+		insert_disqus_comments "${OUTPUT_FILE%%.html}"
 		printf '<div id="blogpost-subject">%s</div><hr />\n' "$BP_SUBJECT"
 		printf '<p class="blogpost-creation-date">%s</p>' "$(date -d $BP_DATE +'%d %B %Y')"
 		printf '<div id="blogpost-content">\n'
