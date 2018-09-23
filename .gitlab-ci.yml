@@ -1,7 +1,10 @@
+image: ubuntu:16.04
+
 pages:
   stage: deploy
   script:
-  - echo 'Hello, world!'
+  - apt-get install markdown
+  - sh run.sh
   artifacts:
     paths:
     - public
