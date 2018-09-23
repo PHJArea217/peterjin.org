@@ -4,7 +4,7 @@ pages:
   stage: deploy
   script:
   - apt-get -y update
-  - apt-get install libtext-markdown-perl
+  - apt-get -y install libtext-markdown-perl
   - sh run.sh
   artifacts:
     paths:
