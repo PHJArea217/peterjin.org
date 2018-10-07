@@ -25,7 +25,7 @@ Jekyll or similar, which does not allow execution of arbitrary code.
 Aside from my blog, I also have started to use Google Cloud Platform for my
 website design. Currently, I only have two Cloud Functions \[n1]. One powers
 my web clock, the other is used to implement the go.peterjin.org URL shortener.
-The [web clock function](https://github.com/nathanmtgh/nginx-clock/blob/master/cloud-function.js)
+The [web clock function](https://github.com/PHJArea217/nginx-clock/blob/master/cloud-function.js)
 is simple \(it returns current time in JSON), but the go.peterjin.org URL
 shortener is somewhat interesting.
 
@@ -57,3 +57,5 @@ credit will be gone!
 There was also an App Engine app that formerly served my
 [web clock](https://webclock.peterjin.org/), but it has been disabled because
 I switched to Cloud Functions for the web clock backend.
+
+**Edit 2018-10-07**: Updated URL for cloud function
