@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# Preliminary: write last modified time
+sed "/^<!-- LAST MODIFIED TIME HERE -->/iLast modified: `date`" index.html > public/index.html
+
 OUTPUT_DIR="public/blog/"
 BLOG_POSTS_DIR="blog-posts/"
 DISQUS_BASE_URL="https://www.peterjin.org/"
