@@ -1,7 +1,9 @@
 #!/bin/sh -e
 
 # Preliminary: write last modified time
-sed "/^<!-- LAST MODIFIED TIME HERE -->/iLast modified: `date`" index.html > public/index.html
+sed "/^<!-- LAST MODIFIED TIME HERE -->/iLast modified: `date +'%F %T'`" index.html > public/index.html
+
+### STEP 1 BLOG
 
 OUTPUT_DIR="public/blog/"
 BLOG_POSTS_DIR="blog-posts/"
@@ -57,3 +59,18 @@ done
 sort -r "$BP_TEMP_FILE" >> "$OUTPUT_DIR/index.html"
 
 sed_text FOOTER blog-template.html >> "$OUTPUT_DIR/index.html"
+
+### STEP 2 gtw-top -> gtw
+
+: ${GTW_INSTRUCTIONS_FILE:=https://gitlab.com/PHJArea217/wordgame/raw/master/instr.md}
+
+(curl "$GTW_INSTRUCTIONS_FILE" | markdown | cat gtw-top.html - &&
+cat <<\EOF
+<a href=".">Back to Home Page</a>
+</body></html>
+EOF
+) > public/gtw.html
+
+### STEP 3 sitemap
+
+(markdown sitemap.md | cat sitemap-top.html - && echo '</body></html>') > public/sitemap.html
